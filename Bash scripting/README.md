@@ -1,6 +1,6 @@
-#Course Outline
+### Course Outline
 
-	Hello World
+ 	Hello World
 	
 	Variables
 

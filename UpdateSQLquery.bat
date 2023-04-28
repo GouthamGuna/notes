@@ -1,0 +1,1 @@
+mysql -u root -proot -h localhost -e "USE stannes_mary;update stannes_mary.campus_user set isActive = 'N' where timestampdiff(second, createdate, now()) > 900;"

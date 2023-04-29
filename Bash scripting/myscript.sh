@@ -1,7 +1,9 @@
 #!/bin/bash
 
 author="gowtham sankar"
-echo "Hello World!"
+now=$(date)
+
+echo "Hello World! now : $now"
 
 sleep 1
 echo ""
@@ -21,4 +23,6 @@ sleep 1
 echo ""
 
 echo "This script author is $author"
+
+# change excute mode cmd is : chmod +x <fileName>
 

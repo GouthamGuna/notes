@@ -137,6 +137,51 @@
   [JavaScript alternative to "for each" loop - Stack Overflow.]( https://stackoverflow.com/questions/12637289/javascript-alternative-to-for-each-loop.)
   [Javascript - alternative to for loop - Stack Overflow.](https://stackoverflow.com/questions/34832435/alternative-to-for-loop.)
   [Don't use Array.forEach, use for() instead Example - Coderwall.](https://coderwall.com/p/kvzbpa/don-t-use-array-foreach-use-for-instead.)
+  
+# Multithreading in Java:
 
+ Here's an example of how you can download multiple files simultaneously using multithreading in Java:
+
+
+	import java.util.concurrent.ExecutorService;
+	import java.util.concurrent.Executors;
+
+	public class DownloadFiles {
+	    public static void main(String[] args) {
+		String[] fileNames = {"file1", "file2", ..., "file100"};
+		ExecutorService pool = Executors.newFixedThreadPool(10);
+		for (String name : fileNames) {
+		    pool.submit(new DownloadTask(name));
+		}
+		pool.shutdown();
+	    }
+	}
+
+	class DownloadTask implements Runnable {
+	    private String fileName;
+
+	    public DownloadTask(String fileName) {
+		this.fileName = fileName;
+	    }
+
+	    @Override
+	    public void run() {
+		// download the file with the given file name
+	    }
+	}
+
+
+ In this example, we create a `DownloadFiles` class that contains a `main` method. The `main` method creates an array of file names and an `ExecutorService` with a fixed thread pool of 10 threads.
+ It then submits a new `DownloadTask` for each file name to the thread pool.
+
+ The `DownloadTask` class implements the `Runnable` interface and contains a `fileName` field. The `run` method of the `DownloadTask` class downloads the file with the given file name.
+
+ This way, you can download multiple files simultaneously using multithreading in Java.
+
+ Source: Conversation with Bing, 6/10/2023
+ [(1) Real Time Example of Multithreading in Java.](https://www.thejavaprogrammer.com/real-time-example-of-multithreading-in-java/.)
+ [(2) multithreading - java download multiple files using threads - Stack ....](https://stackoverflow.com/questions/7502718/java-download-multiple-files-using-threads.)
+ [(3) How to process multiple files simultaneously using Java Multithreading.](https://blogs.perficient.com/2021/08/10/how-to-process-multiple-files-simultaneously-using-java-multithreading/.)
+ [(4) java - Multithreading, Read multiple files and write to new Files ....](https://stackoverflow.com/questions/13983495/multithreading-read-multiple-files-and-write-to-new-files.)
 
 

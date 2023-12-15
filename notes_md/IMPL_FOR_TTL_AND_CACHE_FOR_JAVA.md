@@ -97,4 +97,23 @@ public ActionForward getStaffClassListByLocationAndYearWithCache(ActionMapping m
 		}
 		
 		return null;
+		
+		public interface CachingConstants {
+
+			public static final Map<String, List<StudentDetailsVo>> allStudentCache = new HashMap<>();
+		}
+
+		
+		/*if(CachingConstants.allStudentCache.get("allStudentList") == null) {
+				System.err.println("IF LOOP ");
+				JSONObject object = new JSONObject();
+				object.put("list", list);
+				CachingConstants.allStudentCache.put("allStudentList", list);
+				response.getWriter().print(object);
+			}else {
+				System.err.println("ELSE LOOP ");
+				JSONObject object = new JSONObject();
+				object.put("list", CachingConstants.allStudentCache.get("allStudentList"));
+				response.getWriter().print(object);
+			}*/
 	}

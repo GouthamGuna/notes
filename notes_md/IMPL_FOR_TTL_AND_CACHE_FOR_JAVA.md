@@ -1,4 +1,4 @@
-public ActionForward getStaffClassList(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+        public ActionForward getStaffClassList(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		logger.info("Starting");
 		try {
@@ -26,7 +26,7 @@ public ActionForward getStaffClassList(ActionMapping mapping, ActionForm form, H
 		return null;
 	}
 	
-	public ActionForward getStaffClassListByLocationAndYear(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+	    public ActionForward getStaffClassListByLocationAndYear(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		logger.info("Starting getStaffClassListByLocationAndYear method");
 		try {
@@ -56,7 +56,7 @@ public ActionForward getStaffClassList(ActionMapping mapping, ActionForm form, H
 	}
 
 
-public ActionForward getStaffClassListByLocationAndYearWithCache(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+        public ActionForward getStaffClassListByLocationAndYearWithCache(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		logger.info("Starting getStaffClassListByLocationAndYearWithCache method");
 		try {

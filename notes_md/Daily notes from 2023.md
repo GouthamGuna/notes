@@ -1,0 +1,1 @@
+# Daily notes from 2023

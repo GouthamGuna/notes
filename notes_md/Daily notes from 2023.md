@@ -101,3 +101,29 @@
 		function r(e) {
 			return e.includes("windows") ? "Windows" : e.includes("mac") ? "Mac OS" : e.includes("linux") ? "Linux" : "Unparsed"
 		}
+		
+# JS And JQuery API`S 
+
+        JavaScript: Fetch API :- 
+
+		fetch("https://type.fit/api/quotes")
+		  .then(function(response) {
+			return response.json();
+		  })
+		  .then(function(data) {
+			console.log(data);
+        });
+		
+		JQuery :-
+		
+		const settings = {
+		  "async": true,
+		  "crossDomain": true,
+		  "url": "https://type.fit/api/quotes",
+		  "method": "GET"
+		}
+
+		$.ajax(settings).done(function (response) {
+		  const data = JSON.parse(response);
+		  console.log(data);
+		});

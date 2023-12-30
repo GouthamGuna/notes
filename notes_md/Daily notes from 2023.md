@@ -79,3 +79,25 @@
 				timer.cancel();
 			}
 		}
+		
+# Security/Binary Transparency  
+
+		https://developer.mozilla.org/en-US/docs/Glossary/Base64
+        
+		https://wiki.mozilla.org/Security/Binary_Transparency
+		
+		<script>
+            try {
+                var systemThemeDark, theme = window.localStorage.getItem("theme"), systemThemeMode = window.localStorage.getItem("system-theme-mode");
+                if (("true" === systemThemeMode || !theme) && window.matchMedia) {
+                    var systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
+                    systemThemeDark = systemTheme && systemTheme.matches
+                }
+                var darkTheme = '"dark"' === theme || Boolean(systemThemeDark);
+                darkTheme && document.body.classList.add("dark")
+            } catch (e) {}
+        </script>
+		
+		function r(e) {
+			return e.includes("windows") ? "Windows" : e.includes("mac") ? "Mac OS" : e.includes("linux") ? "Linux" : "Unparsed"
+		}

@@ -127,3 +127,40 @@
 		  const data = JSON.parse(response);
 		  console.log(data);
 		});
+		
+# Add a paragraph and a heading to a div element:
+
+		var div = document.getElementById('myDiv');
+		var range = document.createRange();
+		range.selectNode(div);
+		var paragraph = document.createElement('p');
+		paragraph.textContent = 'This is a paragraph.';
+		var heading = document.createElement('h1');
+		heading.textContent = 'This is a heading';
+		range.insertNode(paragraph);
+		range.insertNode(heading);
+
+# Heading to a div element:
+
+		var div = document.getElementById('myDiv');
+		var paragraph = document.createElement('p');
+		paragraph.textContent = 'This is a paragraph.';
+		var heading = document.createElement('h1');
+		heading.textContent = 'This is a heading';
+		div.appendChild(paragraph);
+		div.appendChild(heading);
+		
+# Paragraph and a heading to a div element:
+
+		var div = document.getElementById('myDiv');
+		div.innerHTML = '<p>This is a paragraph.</p><h1>This is a heading</h1>';
+		
+		let msgAppender = document.querySelector('#apk-disclaimer');
+		let msgPara = "test";
+		
+		let msg_loader = document.createElement('div')
+		msg_loader.setAttribute('style', 'font-size: 18px')
+		let node = document.createTextNode(msgPara);
+		
+		msg_loader.appendChild(node);
+		msgAppender.appendChild(msg_loader);

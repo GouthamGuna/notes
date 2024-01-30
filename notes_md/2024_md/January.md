@@ -1,8 +1,8 @@
-### January Month Notes:-
+# January Month Notes:-
 
- * [Java API Call-Function](#Java API CALL)
+ * ![Java API Call-Function](#java-api-call)
 
-# Java API CALL
+## Java API CALL
 
 		* HttpRequest
 

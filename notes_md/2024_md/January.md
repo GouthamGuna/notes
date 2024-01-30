@@ -1,6 +1,6 @@
 # January Month Notes:-
 
- * ![Java API Call-Function](#java-api-call)
+ * [Java API Call-Function](#java-api-call)
 
 ## Java API CALL
 

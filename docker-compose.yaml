@@ -1,0 +1,12 @@
+version : "3.7"
+
+services:
+  mariadb:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+    volumes:
+      - \\\wsl$\docker-desktop-data\version-pack-data\community\docker\volumes\shared_data\\_data
+    ports:
+      - 4307:3306

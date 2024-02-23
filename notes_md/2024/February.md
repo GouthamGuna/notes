@@ -39,5 +39,58 @@
 		}
 	</script>
 
+## To calculate the thread running time in Java
+
+		// Get the start time in nanoseconds
+		long startTime = System.nanoTime();
+
+		// Execute the thread
+		thread.start();
+
+		// Wait for the thread to finish
+		thread.join();
+
+		// Get the end time in nanoseconds
+		long endTime = System.nanoTime();
+
+		// Calculate the elapsed time in nanoseconds
+		long elapsedTime = endTime - startTime;
+
+
+## To validate the request and response in jQuery	
+
+
+		// Make an Ajax request to the server with the month parameter
+		$.ajax({
+		  url: "some_url",
+		  data: {month: some_month},
+		  beforeSend: function(request) {
+			// Validate the request parameter
+			if (some_month < 1 || some_month > 12) {
+			  // Cancel the request if the month is invalid
+			  request.abort();
+			  // Show an error message
+			  alert("Invalid month");
+			}
+			else {
+			  // Show the loader before sending the request
+			  $("#loader").show();
+			}
+		  },
+		  success: function(response) {
+			// Hide the loader after receiving the response
+			$("#loader").hide();
+			// Validate the response data
+			if (response.status == "ok") {
+			  // Display the results
+			  $("#results").html(response.data);
+			}
+			else {
+			  // Show an error message
+			  alert("Something went wrong");
+			}
+		  }
+		});
+
 
 	

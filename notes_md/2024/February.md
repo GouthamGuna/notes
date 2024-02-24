@@ -91,6 +91,9 @@
 			}
 		  }
 		});
+		
+		
+		<div class="cnd-avatar-preview">  <figure class="cnd-image-preview" style="background-image: url('/recruit/EntityImageAttach.do?actionName=readCandidateImage')"></figure>  </div>
 
 
 	

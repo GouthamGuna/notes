@@ -62,3 +62,12 @@
  This library began to support SHA3-256 since version 1.11, and it requires JDK 9+ as well:
 
 	String sha3Hex = new DigestUtils("SHA3-256").digestAsHex(originalString);
+	
+## Code Snippet 
+
+	char c = 'A';
+	String hex = Integer.toHexString(c); // hex is "41"
+	
+	String hex = "41";
+	int decimal = Integer.parseInt(hex, 16); // decimal is 65
+	char ascii = (char) decimal; // ascii is 'A'

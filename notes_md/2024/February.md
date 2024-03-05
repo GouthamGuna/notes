@@ -94,6 +94,125 @@
 		
 		
 		<div class="cnd-avatar-preview">  <figure class="cnd-image-preview" style="background-image: url('/recruit/EntityImageAttach.do?actionName=readCandidateImage')"></figure>  </div>
+		
+## Spring MVC header auth token
 
+ To validate the spring MVC header auth token, you need to implement a filter that can intercept the incoming requests and check the validity of the token. You can use the Spring Security framework to help you with this task.
 
+ Create a custom authentication filter that extends the `AbstractAuthenticationProcessingFilter` class. This filter will extract the token from the request header and use an authentication manager to authenticate it. You can also handle the success and failure scenarios in this filter.
 	
+	public class TokenAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
+
+		// The name of the header that contains the token
+		private static final String AUTH_HEADER = "X-Auth-Token";
+
+		public TokenAuthenticationFilter() {
+			// Set the URL that this filter will be applied to
+			super("/api/**");
+		}
+
+		@Override
+		public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
+				throws AuthenticationException, IOException, ServletException {
+			// Get the token from the header
+			String token = request.getHeader(AUTH_HEADER);
+			// If the token is null or empty, throw an exception
+			if (token == null || token.isEmpty()) {
+				throw new BadCredentialsException("Missing or invalid token");
+			}
+			// Create a token authentication object with the token
+			TokenAuthentication tokenAuthentication = new TokenAuthentication(token);
+			// Use the authentication manager to authenticate the token
+			return getAuthenticationManager().authenticate(tokenAuthentication);
+		}
+
+		@Override
+		protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
+				Authentication authResult) throws IOException, ServletException {
+			// If the authentication is successful, set the security context and proceed with the request
+			SecurityContextHolder.getContext().setAuthentication(authResult);
+			chain.doFilter(request, response);
+		}
+
+		@Override
+		protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
+				AuthenticationException failed) throws IOException, ServletException {
+			// If the authentication fails, send an error response
+			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, failed.getMessage());
+		}
+	}
+
+Create a custom authentication provider that implements the `AuthenticationProvider` interface. This provider will validate the token and return an authenticated user object if the token is valid. You can use a service or a repository to access the token data from the database.
+
+	public class TokenAuthenticationProvider implements AuthenticationProvider {
+
+		// A service or a repository that can get the token data from the database
+		private TokenService tokenService;
+
+		public TokenAuthenticationProvider(TokenService tokenService) {
+			this.tokenService = tokenService;
+		}
+
+		@Override
+		public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+			// Cast the authentication object to a token authentication object
+			TokenAuthentication tokenAuthentication = (TokenAuthentication) authentication;
+			// Get the token from the authentication object
+			String token = tokenAuthentication.getToken();
+			// Get the token data from the service or the repository
+			TokenData tokenData = tokenService.getTokenData(token);
+			// If the token data is null or expired, throw an exception
+			if (tokenData == null || tokenData.isExpired()) {
+				throw new BadCredentialsException("Invalid or expired token");
+			}
+			// Get the user details from the token data
+			UserDetails userDetails = tokenData.getUserDetails();
+			// Create a new token authentication object with the user details and the authorities
+			TokenAuthentication newTokenAuthentication = new TokenAuthentication(token, userDetails,
+					userDetails.getAuthorities());
+			// Set the authenticated flag to true
+			newTokenAuthentication.setAuthenticated(true);
+			// Return the new token authentication object
+			return newTokenAuthentication;
+		}
+
+		@Override
+		public boolean supports(Class<?> authentication) {
+			// Return true if the authentication class is TokenAuthentication
+			return TokenAuthentication.class.equals(authentication);
+		}
+	}
+	
+Register the custom filter and provider in the security configuration class. You can use the `HttpSecurity` object to add the filter to the filter chain and the `AuthenticationManagerBuilder` object to add the provider to the authentication manager.
+
+	@Configuration
+	@EnableWebSecurity
+	public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+		// A service or a repository that can get the token data from the database
+		private TokenService tokenService;
+
+		public SecurityConfig(TokenService tokenService) {
+			this.tokenService = tokenService;
+		}
+
+		@Override
+		protected void configure(HttpSecurity http) throws Exception {
+			// Disable CSRF protection
+			http.csrf().disable();
+			// Add the custom filter to the filter chain
+			http.addFilterBefore(new TokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+			// Configure the authorization rules
+			http.authorizeRequests()
+					.antMatchers("/api/**").authenticated()
+					.anyRequest().permitAll();
+		}
+
+		@Override
+		protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+			// Add the custom provider to the authentication manager
+			auth.authenticationProvider(new TokenAuthenticationProvider(tokenService));
+		}
+	}
+	
+[REF](https://www.baeldung.com/security-spring)

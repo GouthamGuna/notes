@@ -48,7 +48,7 @@
 		Machine 1's average time is ((1.550 - 0.550) + (1.420 - 0.430)) / 2 = 0.995
 		Machine 2's average time is ((4.512 - 4.100) + (5.000 - 2.500)) / 2 = 1.456
 
-	### Write your MySQL query statement below
+	# Write your MySQL query statement below
 
 		select a1.machine_id, round(avg(a2.timestamp-a1.timestamp), 3) as processing_time 
 		from Activity a1
@@ -160,7 +160,7 @@
 		John attended the Math exam 1 time, the Physics exam 1 time, and the Programming exam 1 time.
 		
 		
-		### Write your MySQL query statement below
+		# Write your MySQL query statement below
 		
 		select s.student_id, s.student_name, sub.subject_name,
 		count(e.student_id) as attended_exams

@@ -67,6 +67,7 @@
 		| student_id    | int     |
 		| student_name  | varchar |
 		+---------------+---------+
+		
 		student_id is the primary key (column with unique values) for this table.
 		Each row of this table contains the ID and the name of one student in the school.
 		 
@@ -78,6 +79,7 @@
 		+--------------+---------+
 		| subject_name | varchar |
 		+--------------+---------+
+		
 		subject_name is the primary key (column with unique values) for this table.
 		Each row of this table contains the name of one subject in the school.
 		 
@@ -90,6 +92,7 @@
 		| student_id   | int     |
 		| subject_name | varchar |
 		+--------------+---------+
+		
 		There is no primary key (column with unique values) for this table. It may contain duplicates.
 		Each student from the Students table takes every course from the Subjects table.
 		Each row of this table indicates that a student with ID student_id attended the exam of subject_name.
@@ -152,7 +155,9 @@
 		| 13         | John         | Physics      | 1              |
 		| 13         | John         | Programming  | 1              |
 		+------------+--------------+--------------+----------------+
+		
 		Explanation: 
+		
 		The result table should contain all students and all subjects.
 		Alice attended the Math exam 3 times, the Physics exam 2 times, and the Programming exam 1 time.
 		Bob attended the Math exam 1 time, the Programming exam 1 time, and did not attend the Physics exam.
@@ -182,3 +187,123 @@
 			GROUP BY student_id, subject_name
 		) e USING (student_id, subject_name)
 		ORDER BY s.student_id, sub.subject_name;
+		
+## Managers with at Least 5 Direct Reports
+
+	Table: Employee
+
+	+-------------+---------+
+	| Column Name | Type    |
+	+-------------+---------+
+	| id          | int     |
+	| name        | varchar |
+	| department  | varchar |
+	| managerId   | int     |
+	+-------------+---------+
+	
+	id is the primary key (column with unique values) for this table.
+	Each row of this table indicates the name of an employee, their department, and the id of their manager.
+	If managerId is null, then the employee does not have a manager.
+	No employee will be the manager of themself.
+	
+	Example 1:
+
+	Input: 
+	Employee table:
+	+-----+-------+------------+-----------+
+	| id  | name  | department | managerId |
+	+-----+-------+------------+-----------+
+	| 101 | John  | A          | null      |
+	| 102 | Dan   | A          | 101       |
+	| 103 | James | A          | 101       |
+	| 104 | Amy   | A          | 101       |
+	| 105 | Anne  | A          | 101       |
+	| 106 | Ron   | B          | 101       |
+	+-----+-------+------------+-----------+
+	Output: 
+	+------+
+	| name |
+	+------+
+	| John |
+	+------+
+	
+	
+	# Write your MySQL query statement below
+	
+	select name from employee where id in (select managerId from employee group by managerId having count(managerId)>4);
+	
+## Confirmation Rate
+
+	Table: Signups
+
+	+----------------+----------+
+	| Column Name    | Type     |
+	+----------------+----------+
+	| user_id        | int      |
+	| time_stamp     | datetime |
+	+----------------+----------+
+	
+	user_id is the column of unique values for this table.
+	Each row contains information about the signup time for the user with ID user_id.
+	
+	Table: Confirmations
+
+	+----------------+----------+
+	| Column Name    | Type     |
+	+----------------+----------+
+	| user_id        | int      |
+	| time_stamp     | datetime |
+	| action         | ENUM     |
+	+----------------+----------+
+	
+	(user_id, time_stamp) is the primary key (combination of columns with unique values) for this table.
+	user_id is a foreign key (reference column) to the Signups table.
+	action is an ENUM (category) of the type ('confirmed', 'timeout')
+	Each row of this table indicates that the user with ID user_id requested a confirmation message at time_stamp and that confirmation message was either confirmed ('confirmed') or expired without confirming ('timeout').
+	
+	Example 1:
+
+	Input: 
+	Signups table:
+	+---------+---------------------+
+	| user_id | time_stamp          |
+	+---------+---------------------+
+	| 3       | 2020-03-21 10:16:13 |
+	| 7       | 2020-01-04 13:57:59 |
+	| 2       | 2020-07-29 23:09:44 |
+	| 6       | 2020-12-09 10:39:37 |
+	+---------+---------------------+
+	
+	Confirmations table:
+	+---------+---------------------+-----------+
+	| user_id | time_stamp          | action    |
+	+---------+---------------------+-----------+
+	| 3       | 2021-01-06 03:30:46 | timeout   |
+	| 3       | 2021-07-14 14:00:00 | timeout   |
+	| 7       | 2021-06-12 11:57:29 | confirmed |
+	| 7       | 2021-06-13 12:58:28 | confirmed |
+	| 7       | 2021-06-14 13:59:27 | confirmed |
+	| 2       | 2021-01-22 00:00:00 | confirmed |
+	| 2       | 2021-02-28 23:59:59 | timeout   |
+	+---------+---------------------+-----------+
+	
+	Output: 
+	+---------+-------------------+
+	| user_id | confirmation_rate |
+	+---------+-------------------+
+	| 6       | 0.00              |
+	| 3       | 0.00              |
+	| 7       | 1.00              |
+	| 2       | 0.50              |
+	+---------+-------------------+
+	
+	Explanation: 
+	User 6 did not request any confirmation messages. The confirmation rate is 0.
+	User 3 made 2 requests and both timed out. The confirmation rate is 0.
+	User 7 made 3 requests and all were confirmed. The confirmation rate is 1.
+	User 2 made 2 requests where one was confirmed and the other timed out. The confirmation rate is 1 / 2 = 0.5.
+	
+	# Write your MySQL query statement below
+	
+	select s.user_id, round(avg(if(c.action="confirmed",1,0)),2) as confirmation_rate
+	from Signups as s left join Confirmations as c on s.user_id= c.user_id group by user_id;

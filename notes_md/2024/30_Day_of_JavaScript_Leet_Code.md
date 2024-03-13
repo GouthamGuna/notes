@@ -42,3 +42,16 @@
 			}
 		};
 	};
+	
+## Merge Sorted Array 
+
+ [REF](https://github.com/GouthamGuna/typical-tasks/blob/main/experimental-lab-2024/src/main/java/in/dev/gmsk/leetcode/EasyProblems.java)
+	
+	# Write your Script below
+	
+	var merge = function(nums1, m, nums2, n) {
+		for (let i = m, j = 0; j < n; i++, j++) {
+			nums1[i] = nums2[j];
+		}
+		nums1.sort((a, b) => a - b);
+	};

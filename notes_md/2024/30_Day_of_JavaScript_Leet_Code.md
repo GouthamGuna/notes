@@ -10,38 +10,38 @@
  
  * notToBe(val) accepts another value and returns true if the two values !== each other. If they are equal, it should throw an error "Equal".
  
- * Example 1:
+	 * Example 1:
 
-	Input: func = () => expect(5).toBe(5)
-	Output: {"value": true}
-	Explanation: 5 === 5 so this expression returns true.
+		Input: func = () => expect(5).toBe(5)
+		Output: {"value": true}
+		Explanation: 5 === 5 so this expression returns true.
+		
+	* Example 2:
+	 
+		Input: func = () => expect(5).toBe(null)
+		Output: {"error": "Not Equal"}
+		Explanation: 5 !== null so this expression throw the error "Not Equal".
+		
+	* Example 3:
+	 
+		Input: func = () => expect(5).notToBe(null)
+		Output: {"value": true}
+		Explanation: 5 !== null so this expression returns true
 	
-* Example 2:
- 
-	Input: func = () => expect(5).toBe(null)
-	Output: {"error": "Not Equal"}
-	Explanation: 5 !== null so this expression throw the error "Not Equal".
-	
-* Example 3:
- 
-	Input: func = () => expect(5).notToBe(null)
-	Output: {"value": true}
-	Explanation: 5 !== null so this expression returns true
-	
-	# Write your Script below
-	
-	var expect = function(val) {
-		return {
-			toBe: (val2) => {
-				if(val !== val2) throw new Error("Not Equal");
-				else return true;
-			},
-			notToBe: (val2) => {
-				if(val === val2) throw new Error("Equal")
-				else return true;
-			}
+		# Write your Script below
+		
+		var expect = function(val) {
+			return {
+				toBe: (val2) => {
+					if(val !== val2) throw new Error("Not Equal");
+					else return true;
+				},
+				notToBe: (val2) => {
+					if(val === val2) throw new Error("Equal")
+					else return true;
+				}
+			};
 		};
-	};
 	
 ## Merge Sorted Array 
 

@@ -48,7 +48,7 @@
 		Machine 1's average time is ((1.550 - 0.550) + (1.420 - 0.430)) / 2 = 0.995
 		Machine 2's average time is ((4.512 - 4.100) + (5.000 - 2.500)) / 2 = 1.456
 
-	# Write your MySQL query statement below
+	# MySQL query statement below
 
 		select a1.machine_id, round(avg(a2.timestamp-a1.timestamp), 3) as processing_time 
 		from Activity a1
@@ -165,7 +165,7 @@
 		John attended the Math exam 1 time, the Physics exam 1 time, and the Programming exam 1 time.
 		
 		
-		# Write your MySQL query statement below
+		# MySQL query statement below
 		
 		select s.student_id, s.student_name, sub.subject_name,
 		count(e.student_id) as attended_exams
@@ -228,7 +228,7 @@
 	+------+
 	
 	
-	# Write your MySQL query statement below
+	# MySQL query statement below
 	
 	select name from employee where id in (select managerId from employee group by managerId having count(managerId)>4);
 	
@@ -303,7 +303,58 @@
 	User 7 made 3 requests and all were confirmed. The confirmation rate is 1.
 	User 2 made 2 requests where one was confirmed and the other timed out. The confirmation rate is 1 / 2 = 0.5.
 	
-	# Write your MySQL query statement below
+	# MySQL query statement below
 	
 	select s.user_id, round(avg(if(c.action="confirmed",1,0)),2) as confirmation_rate
 	from Signups as s left join Confirmations as c on s.user_id= c.user_id group by user_id;
+	
+## Not Boring Movies
+	
+	
+ Write a solution to report the movies with an odd-numbered ID and a description that is not "boring".
+
+ Return the result table ordered by rating in descending order.
+
+ The result format is in the following example.
+
+ 
+
+	Example 1:
+
+	Input: 
+	Cinema table:
+	+----+------------+-------------+--------+
+	| id | movie      | description | rating |
+	+----+------------+-------------+--------+
+	| 1  | War        | great 3D    | 8.9    |
+	| 2  | Science    | fiction     | 8.5    |
+	| 3  | irish      | boring      | 6.2    |
+	| 4  | Ice song   | Fantacy     | 8.6    |
+	| 5  | House card | Interesting | 9.1    |
+	+----+------------+-------------+--------+
+	
+	Output: 
+	+----+------------+-------------+--------+
+	| id | movie      | description | rating |
+	+----+------------+-------------+--------+
+	| 5  | House card | Interesting | 9.1    |
+	| 1  | War        | great 3D    | 8.9    |
+	+----+------------+-------------+--------+
+	
+
+ Explanation: 
+ 
+ We have three movies with odd-numbered IDs: 1, 3, and 5. The movie with ID = 3 is boring so we do not include it in the answer.
+	
+	
+	# MySQL query statement below
+	
+		select * from Cinema where id % 2 != 0 and description != 'boring' order by rating desc;
+		
+								OR
+								
+		select * from Cinema where id % 2 = 1 and description != "boring" order by rating desc;
+		
+								OR
+								
+		select * from Cinema where mod(id,2) and description<>'boring' order by rating desc;

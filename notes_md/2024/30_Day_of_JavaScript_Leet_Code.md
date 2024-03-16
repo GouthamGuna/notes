@@ -119,7 +119,7 @@ Constraints:
 		return filteredArr;
 	};
 	
-	**OR**
+ **OR**
 		
 	var filter = function(arr, fn) {
 

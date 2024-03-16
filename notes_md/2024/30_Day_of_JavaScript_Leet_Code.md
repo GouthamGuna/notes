@@ -28,7 +28,7 @@
 		Output: {"value": true}
 		Explanation: 5 !== null so this expression returns true
 	
- Solution Script below
+ **Solution Script below**
 		
 		var expect = function(val) {
 			return {
@@ -47,7 +47,7 @@
 
  [REF](https://github.com/GouthamGuna/typical-tasks/blob/main/experimental-lab-2024/src/main/java/in/dev/gmsk/leetcode/EasyProblems.java)
 	
- Solution Script below
+ **Solution Script below**
 	
 	var merge = function(nums1, m, nums2, n) {
 		for (let i = m, j = 0; j < n; i++, j++) {
@@ -72,7 +72,7 @@
 	const newArray = map(arr, plusone); // [2,3,4]
 	The function increases each value in the array by one. 
 	
- Solution Script below
+ **Solution Script below**
 	
 	var map = function(arr, fn) {
 		return arr.map(fn);
@@ -104,7 +104,7 @@ Constraints:
  0 <= arr.length <= 1000
  -109 <= arr[i] <= 
  
- Solution Script below
+ **Solution Script below**
  
 	 var filter = function(arr, fn) {
 
@@ -115,6 +115,20 @@ Constraints:
 				filteredArr.push(arr[i])
 			}
 		}
+
+		return filteredArr;
+	};
+	
+	**OR**
+		
+	var filter = function(arr, fn) {
+
+		let filteredArr = [];
+
+		arr.forEach((e, i) => {
+			let value = fn(e, i);
+			if (Boolean(value)) filteredArr.push(e);
+		});
 
 		return filteredArr;
 	};

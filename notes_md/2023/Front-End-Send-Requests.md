@@ -117,3 +117,32 @@
 		xhr.setRequestHeader('X-RapidAPI-Host', 'solve-sudoku.p.rapidapi.com');
 
 		xhr.send(data);
+		
+## GO	
+		
+		package main
+
+		import (
+			"fmt"
+			"net/http"
+			"io"
+		)
+
+		func main() {
+
+			url := "https://privatix-temp-mail-v1.p.rapidapi.com/request/delete/id/%7Bmail_id%7D/"
+
+			req, _ := http.NewRequest("GET", url, nil)
+
+			req.Header.Add("X-RapidAPI-Key", "SIGN-UP-FOR-KEY")
+			req.Header.Add("X-RapidAPI-Host", "privatix-temp-mail-v1.p.rapidapi.com")
+
+			res, _ := http.DefaultClient.Do(req)
+
+			defer res.Body.Close()
+			body, _ := io.ReadAll(res.Body)
+
+			fmt.Println(res)
+			fmt.Println(string(body))
+
+		}

@@ -317,3 +317,59 @@ Explanation:
 
  * The time complexity of this solution is O(V + E), where V is the number of nodes (dependencies) and E is the number of edges (dependencies) in the graph.
  *  The space complexity is O(V) for the adjacency list representation of the graph and the `visited` and `recStack` arrays.
+ 
+## perfect squares that sum up to a given number n.
+
+ * To solve the problem of finding the minimum number of perfect squares that sum up to a given number n in Java 8, you can use dynamic programming. 
+
+
+```java
+public class PerfectSquares {
+    public static int numSquares(int n) {
+        int[] dp = new int[n + 1];
+        Arrays.fill(dp, Integer.MAX_VALUE);
+        dp[0] = 0;
+
+        for (int i = 1; i <= n; i++) {
+            int j = 1;
+            while (j * j <= i) {
+                dp[i] = Math.min(dp[i], dp[i - j * j] + 1);
+                j++;
+            }
+        }
+
+        return dp[n];
+    }
+
+    public static void main(String[] args) {
+        int n = 15;
+        int result = numSquares(n);
+        System.out.println("The minimum number of perfect squares that sum up to " + n + " is: " + result);
+    }
+}
+```
+
+Output:
+```
+The minimum number of perfect squares that sum up to 15 is: 4
+```
+
+Explanation:
+1. We create an array `dp` of size `n + 1` and initialize all the values to `Integer.MAX_VALUE`.
+2. We set `dp` to 0, as the sum of no perfect squares is 0.
+3. We iterate from 1 to `n` and for each `i`, we find the minimum number of perfect squares that sum up to `i`.
+   - We start with `j = 1` and check if `j * j` is less than or equal to `i`.
+   - If it is, we update `dp[i]` to the minimum of its current value and `dp[i - j * j] + 1`.
+   - We increment `j` to check the next perfect square.
+4. Finally, we return the value stored in `dp[n]`, which represents the minimum number of perfect squares that sum up to `n`.
+
+The time complexity of this solution is O(n * sqrt(n)), as we iterate through all the numbers from 1 to `n` and for each number, we find the minimum number of perfect squares that sum up to it. The space complexity is O(n) for the `dp` array.
+
+This solution is based on the Lagrange's Four Square Theorem, which states that every positive integer can be expressed as the sum of at most four perfect squares.
+
+Citations:
+[1] https://www.prepbytes.com/blog/java/java-program-to-check-for-the-perfect-square/
+[2] https://www.edureka.co/blog/java-sqrt-method/
+[3] https://stackoverflow.com/questions/36688675/square-numbers-java
+[4] https://www.javatpoint.com/java-program-to-check-if-a-given-number-is-perfect-square
+[5] https://www.geeksforgeeks.org/minimum-number-of-squares-whose-sum-equals-to-given-number-n/

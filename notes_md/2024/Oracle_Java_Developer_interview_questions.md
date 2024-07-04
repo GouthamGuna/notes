@@ -73,10 +73,10 @@
 Remember to tailor your answers to your specific experience and the role you're interviewing for. Provide concrete examples whenever possible. Good luck!
 
 Citations:
-[1] https://www.glassdoor.co.in/Interview/Oracle-Java-Developer-Interview-Questions-EI_IE1737.0,6_KO7,21.htm
-[2] https://www.geeksforgeeks.org/oracle-interview-experience-set-43-3-years-experienced/
-[3] https://www.credosystemz.com/oracle-java-interview-questions/
-[4] https://howtodoinjava.com/interview-questions/real-java-interview-questions-asked-for-oracle-enterprise-manager-project/
+[1](https://www.glassdoor.co.in/Interview/Oracle-Java-Developer-Interview-Questions-EI_IE1737.0,6_KO7,21.htm)
+[2](https://www.geeksforgeeks.org/oracle-interview-experience-set-43-3-years-experienced/)
+[3](https://www.credosystemz.com/oracle-java-interview-questions/)
+[4](https://howtodoinjava.com/interview-questions/real-java-interview-questions-asked-for-oracle-enterprise-manager-project/)
 
 
 ## DSA Problem One Explanation
@@ -368,8 +368,8 @@ The time complexity of this solution is O(n * sqrt(n)), as we iterate through al
 This solution is based on the Lagrange's Four Square Theorem, which states that every positive integer can be expressed as the sum of at most four perfect squares.
 
 Citations:
-[1] https://www.prepbytes.com/blog/java/java-program-to-check-for-the-perfect-square/
-[2] https://www.edureka.co/blog/java-sqrt-method/
-[3] https://stackoverflow.com/questions/36688675/square-numbers-java
-[4] https://www.javatpoint.com/java-program-to-check-if-a-given-number-is-perfect-square
-[5] https://www.geeksforgeeks.org/minimum-number-of-squares-whose-sum-equals-to-given-number-n/
+[1](https://www.prepbytes.com/blog/java/java-program-to-check-for-the-perfect-square/)
+[2](https://www.edureka.co/blog/java-sqrt-method/)
+[3](https://stackoverflow.com/questions/36688675/square-numbers-java)
+[4](https://www.javatpoint.com/java-program-to-check-if-a-given-number-is-perfect-square)
+[5](https://www.geeksforgeeks.org/minimum-number-of-squares-whose-sum-equals-to-given-number-n/)

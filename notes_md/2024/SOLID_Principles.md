@@ -108,8 +108,8 @@ Do you have any specific questions about these principles or how to apply them i
 
 Source:
 
-(1) [A Solid Guide to SOLID Principles | Baeldung.](https://www.baeldung.com/solid-principles.)
-(2) [SOLID Principles Java - Javatpoint.](https://www.javatpoint.com/solid-principles-java.)
-(3) [SOLID Design Principles | JRebel by Perforce.](https://www.jrebel.com/blog/solid-principles-in-java.)
-(4) [A Comprehensive Guide to SOLID Principles - HowToDoInJava.](https://howtodoinjava.com/best-practices/solid-principles/.)
-(5) [SOLID Principles Java - InterviewBit.](https://www.interviewbit.com/blog/solid-principles-java/.)
+[A Solid Guide to SOLID Principles | Baeldung.](https://www.baeldung.com/solid-principles.)
+[SOLID Principles Java - Javatpoint.](https://www.javatpoint.com/solid-principles-java.)
+[SOLID Design Principles | JRebel by Perforce.](https://www.jrebel.com/blog/solid-principles-in-java.)
+[A Comprehensive Guide to SOLID Principles - HowToDoInJava.](https://howtodoinjava.com/best-practices/solid-principles/.)
+[SOLID Principles Java - InterviewBit.](https://www.interviewbit.com/blog/solid-principles-java/.)
